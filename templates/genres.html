@@ -1,0 +1,36 @@
+{% extends 'home.html' %}
+ 
+{% load widget_tweaks %}
+ 
+
+{% block content %}
+
+	<div class="container">
+	  <h3><small>Genres </small></h3>
+	   <ul class="list-group">
+	  		{% for i in genres %}
+				<li class="list-group-item">	
+					<a href='/genres/{{ i.Genre_id }}'> {{ i.Genre_name }}</a>
+				</li>	
+	   		{% endfor %}
+	   	</ul>
+	   <p><button type="button" class="btn btn-default" data-toggle="collapse" data-target="#add_genre">Add genre</button></p>
+	</div>
+	
+	<div class="container">
+	 	<div id="add_genre" class="collapse">	
+    		<form role="form" action="/add_genre/" method="POST">
+      			{% csrf_token %}
+       			 	{% for field in form %}
+          				<div class="form-group">
+           					 <label for="id_{{ field.name }}">{{ field.label }}</label>
+            				{{ field|add_class:"form-control" }}
+          				</div>
+        			{% endfor %}
+ 						<div class="form-actions">
+         					<button type="submit" class="btn btn-default" >Add !</button>
+        				</div>
+    		</form>
+  		</div>
+
+{% endblock %}

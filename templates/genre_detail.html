@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+
+{% block content %}
+	
+
+{% load widget_tweaks %}
+
+	<div class="container">
+	  <h2><strong>{{ genre_name }}</small></h2>
+	   <ul class="list-group">
+	  		{% for i in track_list %}
+				<li class="list-group-item">	
+					<a href='/tracks/{{ i.id }}'> {{ i.Track_name }}</a>
+				</li>	
+	   		{% endfor %}
+	   	</ul>
+	   <p><button type="button" class="btn btn-default" data-toggle="collapse" data-target="#rename_genre">Rename genre</button></p>
+        
+    </div> 	
+
+
+	  <div class="container"></div>
+    <div class="container">
+      <div id="rename_genre" class="collapse">	
+    		<form role="form" action="/genres/{{ genre_id }}/" method="POST" >
+      			{% csrf_token %}
+       			 	{% for field in form %}
+          				<div class="form-group">
+           					 <label for="id_{{ field.name }}">{{ field.label }}</label>
+            				{{ field|add_class:"form-control" }}
+          				</div>
+        			{% endfor %}
+ 						<div class="form-actions">
+         					<button type="submit" class="btn btn-default" >Submit</button>
+        				</div>
+    		</form>
+  		</div>
+  	</div> 
+	   	
+{% endblock %}

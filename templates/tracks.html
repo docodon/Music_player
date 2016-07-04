@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+	<div class="container">
+	  <h3><small>Playlist </small></h3>
+	   <ul class="list-group">
+	  		{% for i in track_list %}
+				<li class="list-group-item">	
+					<a href='/tracks/{{ i.id }}'> {{ i.Track_name }}</a>
+				</li>	
+	   		{% endfor %}
+
+	   	</ul>
+	   	
+	</div>  
+
+{% endblock %}
